@@ -10,7 +10,7 @@ public class Solution {
 
     public static void main(String[] args) {
         List<Node> interpolationNodes = initInterpolationNodes();
-        List<Data> xData = initXData(0, 5, 0.5);
+        List<Data> xData = initXData(0, 4, 0.5);
 
         EventQueue.invokeLater(() -> {
             LineChart ex = new LineChart(interpolationNodes, xData);
