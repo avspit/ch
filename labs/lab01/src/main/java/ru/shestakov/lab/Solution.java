@@ -18,10 +18,4 @@ public class Solution {
         });
     }
 
-    private static void print(List<Data> xData) {
-        xData.forEach(elem -> {
-            System.out.println(elem.getX() + " " + elem.getY());
-        });
-    }
-
 }
