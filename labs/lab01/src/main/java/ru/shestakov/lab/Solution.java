@@ -16,14 +16,6 @@ public class Solution {
             LineChart ex = new LineChart(interpolationNodes, xData);
             ex.setVisible(true);
         });
-
-
-
-        /*xData.forEach(elem -> {
-            Lagrangian lagrangian = new Lagrangian(interpolationNodes);
-            elem.setY(lagrangian.calculate(elem.getX()));
-        });
-        print(xData);*/
     }
 
     private static void print(List<Data> xData) {
