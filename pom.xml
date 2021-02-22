@@ -6,7 +6,24 @@
 
     <groupId>chislennie-metodi</groupId>
     <artifactId>chislennie-metodi</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>labs</module>
+    </modules>
 
+    <properties>
+        <thirdparty.jfreechart.version>1.5.0</thirdparty.jfreechart.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jfree</groupId>
+                <artifactId>jfreechart</artifactId>
+                <version>${thirdparty.jfreechart.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
