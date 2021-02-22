@@ -7,4 +7,4 @@
 
 ### Лабораторная работа 1
 
-![Image alt](https://github.com/avspit/cm/tree/master/labs/common/src/main/resources/exercises/lab01.jpg)
+![Image alt](https://github.com/avspit/cm/raw/master/labs/common/src/main/resources/exercises/lab01.jpg)
