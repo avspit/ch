@@ -1,7 +1,10 @@
 package ru.shestakov.lab;
 
 import java.awt.*;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Scanner;
 
 import static ru.shestakov.lab.Util.initInterpolationNodes;
 import static ru.shestakov.lab.Util.initXData;
@@ -17,5 +20,4 @@ public class Solution {
             ex.setVisible(true);
         });
     }
-
 }

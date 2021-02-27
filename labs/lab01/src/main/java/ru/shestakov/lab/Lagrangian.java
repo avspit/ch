@@ -15,9 +15,9 @@ public class Lagrangian {
             double term = interpolationNodes.get(i).getY();
             for (int j = 0; j < interpolationNodes.size(); j++) {
                 if (j != i)
-                    term *= (xValue - interpolationNodes.get(j).getX()) / (interpolationNodes.get(i).getX() - interpolationNodes.get(j).getX());
+                    term = term * (xValue - interpolationNodes.get(j).getX()) / (interpolationNodes.get(i).getX() - interpolationNodes.get(j).getX());
             }
-            result += term;
+            result = result + term;
         }
         return result;
     }
