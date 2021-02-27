@@ -18,12 +18,6 @@ public class Util {
                 new Node(4.5 * h, calculate(4.5 * h)),
                 new Node(6.5 * h, calculate(6.5 * h))
         );
-        /*return Arrays.asList(
-                new Node(0, 1),
-                new Node(2, 3),
-                new Node(4, 5),
-                new Node(6, 7)
-        );*/
     }
 
     public static List<Data> initXData(double from, double to, double step) {
