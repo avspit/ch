@@ -22,7 +22,7 @@ public class ExactSolution {
         List<Entity> table = new ArrayList<Entity>();
         for (double i=from; i<to; i+=h) {
             double x = formatter.round(i, 2);
-            double y = formatter.round(function.calculate(x), 2);
+            double y = formatter.round(function.calculate(x), 5);
             ExactSolutionEntity entity = new ExactSolutionEntity(x, y);
             table.add(entity);
         }
