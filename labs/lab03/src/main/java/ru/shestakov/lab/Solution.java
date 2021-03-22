@@ -1,8 +1,8 @@
 package ru.shestakov.lab;
 
-import ru.shestakov.lab.methods.RectangleMethod;
-import ru.shestakov.lab.methods.SimpsonMethod;
-import ru.shestakov.lab.methods.TrapezoidMethod;
+import ru.shestakov.lab.method.RectangleMethod;
+import ru.shestakov.lab.method.SimpsonMethod;
+import ru.shestakov.lab.method.TrapezoidMethod;
 
 import static ru.shestakov.lab.Function.FUNCTION;
 

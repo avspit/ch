@@ -1,4 +1,4 @@
-package ru.shestakov.lab.methods;
+package ru.shestakov.lab.method;
 
 import ru.shestakov.lab.Function;
 
