@@ -4,6 +4,7 @@ import ru.shestakov.lab.chart.LineChart;
 import ru.shestakov.lab.function.Cauchy;
 import ru.shestakov.lab.function.Function;
 import ru.shestakov.lab.method.ExactSolution;
+import ru.shestakov.lab.method.RungeKutta;
 import ru.shestakov.lab.utils.LineChartUtil;
 import ru.shestakov.lab.method.Euler;
 
@@ -31,6 +32,12 @@ public class Solution {
                             "Метод Эйлера",
                             new Euler(cauchy).calculate(INITIAL_CONDITION_X, INITIAL_CONDITION_Y, INTERVAL_FROM, INTERVAL_TO, STEP)
                             )
+            );
+            ex.addDataSet(
+                    new LineChartUtil().createDataset(
+                            "Метод 4 порядка",
+                            new RungeKutta(cauchy).calculate(INITIAL_CONDITION_X, INITIAL_CONDITION_Y, INTERVAL_FROM, INTERVAL_TO, STEP)
+                    )
             );
             ex.setVisible(true);
             new LineChartUtil().printDataset(ex.getDataset());
