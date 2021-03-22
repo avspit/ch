@@ -22,13 +22,13 @@ public class Solution {
             LineChart ex = new LineChart();
             ex.addDataSet(
                     new LineChartUtil().createDataset(
-                            "Exact",
+                            "Точное решение",
                             new ExactSolution(new Function()).calculate(INTERVAL_FROM, INTERVAL_TO, STEP)
                     )
             );
             ex.addDataSet(
                     new LineChartUtil().createDataset(
-                            "Euler",
+                            "Метод Эйлера",
                             new Euler(cauchy).calculate(INITIAL_CONDITION_X, INITIAL_CONDITION_Y, INTERVAL_FROM, INTERVAL_TO, STEP)
                             )
             );
