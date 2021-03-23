@@ -16,7 +16,7 @@ public class Solution {
     private final static double INTERVAL_TO = 1; // Интервал "до"
     private final static double STEP = 0.1; // Шаг
     private final static double INITIAL_CONDITION_X = 0; // Начальное условие x
-    private final static double INITIAL_CONDITION_Y = 1; // Начальное условие y
+    private final static double INITIAL_CONDITION_Y = -2; // Начальное условие y
 
     public static void main(String[] args) {
         Cauchy cauchy = new Cauchy();
