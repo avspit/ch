@@ -1,7 +1,5 @@
 package ru.shestakov.lab.utils;
 
-import com.sun.javafx.UnmodifiableArrayList;
-import org.jfree.chart.util.StringUtils;
 import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -10,6 +8,14 @@ import ru.shestakov.lab.model.Entity;
 import java.util.List;
 
 public class LineChartUtil {
+    private XYSeriesCollection dataset;
+
+    public LineChartUtil() {
+    }
+
+    public LineChartUtil(XYSeriesCollection dataset) {
+        this.dataset = dataset;
+    }
 
     public XYSeries createDataset(String label, List<Entity> list) {
         XYSeries series = new XYSeries(label);
@@ -19,7 +25,7 @@ public class LineChartUtil {
         return series;
     }
 
-    public void printDataset(XYSeriesCollection dataset) {
+    public void printDataset() {
         List<XYSeries> list = dataset.getSeries();
         for (int i=0; i<list.size(); i++) {
             XYSeries series = dataset.getSeries(i);
