@@ -65,10 +65,14 @@ public class LineChart extends JFrame {
 
         XYSplineRenderer renderer = new XYSplineRenderer();
 
-        renderer.setSeriesPaint(0, Color.BLUE);
+        renderer.setSeriesPaint(0, new Color(248, 76, 109));
         renderer.setSeriesStroke(0, new BasicStroke(2.0f));
-        renderer.setSeriesPaint(1, Color.RED);
+        renderer.setSeriesPaint(1, new Color(131, 160, 168));
         renderer.setSeriesStroke(1, new BasicStroke(2.0f));
+        renderer.setSeriesPaint(2, new Color(45, 189, 238));
+        renderer.setSeriesStroke(2, new BasicStroke(2.0f));
+        renderer.setSeriesPaint(3, new Color(34, 222, 94));
+        renderer.setSeriesStroke(3, new BasicStroke(2.0f));
 
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(Color.WHITE);
