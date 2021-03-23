@@ -3,6 +3,8 @@ package ru.shestakov.lab.method;
 import ru.shestakov.lab.comparator.EntitySortByX;
 import ru.shestakov.lab.function.Cauchy;
 import ru.shestakov.lab.model.Entity;
+import ru.shestakov.lab.model.EulerEntity;
+import ru.shestakov.lab.model.PredictorCorrectorEntity;
 import ru.shestakov.lab.model.RungeKuttaEntity;
 import ru.shestakov.lab.utils.Formatter;
 
@@ -10,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RungeKutta {
+public class PredictorCorrector {
     private Cauchy cauchy;
     private Formatter formatter = new Formatter();
 
-    public RungeKutta(Cauchy cauchy) {
+    public PredictorCorrector(Cauchy cauchy) {
         this.cauchy = cauchy;
     }
 
@@ -26,11 +28,11 @@ public class RungeKutta {
                 x = formatter.round(i, 2);
                 y = formatter.round(lastY, 5);
             }
-            double k1 = cauchy.calculate(x, y);
-            double k2 = cauchy.calculate(x + h/2, y + h*k1/2);
-            double k3 = cauchy.calculate(x + h/2, y + h*k2/2);
-            double k4 = cauchy.calculate(x + h, y + h*k3);
-            double deltaY = h/6 * (k1 + 2*k2 + 2*k3 + k4);
+            double k1 = x + h/2;
+            double k2 = cauchy.calculate(x,y);
+            double k3 = y + h/2 * k2;
+            double k4 = cauchy.calculate(k1, k3);
+            double deltaY = h * k4;
             lastY = y + deltaY;
             RungeKuttaEntity entity = new RungeKuttaEntity(x, y, k1, k2, k3, k4, deltaY);
             table.add(entity);

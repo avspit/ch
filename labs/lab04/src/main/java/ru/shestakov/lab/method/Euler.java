@@ -1,7 +1,7 @@
 package ru.shestakov.lab.method;
 
 import ru.shestakov.lab.function.Cauchy;
-import ru.shestakov.lab.comparator.EulerEntitySortByX;
+import ru.shestakov.lab.comparator.EntitySortByX;
 import ru.shestakov.lab.model.Entity;
 import ru.shestakov.lab.model.EulerEntity;
 import ru.shestakov.lab.utils.Formatter;
@@ -31,7 +31,7 @@ public class Euler {
             table.add(entity);
             last = entity;
         }
-        Collections.sort(table, new EulerEntitySortByX());
+        Collections.sort(table, new EntitySortByX());
         return table;
     }
 
