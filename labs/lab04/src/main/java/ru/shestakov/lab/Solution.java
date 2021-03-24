@@ -1,6 +1,5 @@
 package ru.shestakov.lab;
 
-import org.jfree.data.xy.XYSeriesCollection;
 import ru.shestakov.lab.chart.LineChart;
 import ru.shestakov.lab.function.Cauchy;
 import ru.shestakov.lab.function.Function;
@@ -35,8 +34,10 @@ public class Solution {
             // Создаем таблицу сравнения значений
             GroupableJFrame frame = new GroupableJFrame("Таблица сравнения значений", ex.getDataset());
             frame.setVisible(true);
-        });
 
+            // Выведем данные в консоль для проверки
+            new LineChartUtil(ex.getDataset()).printDataset();
+        });
     }
 
     private static void createLineChart(LineChart ex, Cauchy cauchy) {
