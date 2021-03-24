@@ -18,15 +18,14 @@ public class SimpsonMethod {
             int ratio = i % 2 == 0 ? 2 : 4;
             double x = sectionFrom + step * i;
             double y = function.calculate(x);
-            x = simpsonCeiling(x);
-            y = simpsonCeiling(y);
+            //y = simpsonCeiling(y);
             result += ratio * y;
         }
         return (step / 3) * (result + firstResult + lastResult);
     }
 
     private double simpsonCeiling(double value) {
-        return (double)Math.round(value * 1000d) / 1000d;
+        return (double)Math.round(value * 1000d) / 1000d; // точность 0.001
     }
 
 }
