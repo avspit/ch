@@ -40,7 +40,8 @@ public class GroupableJFrame extends JFrame {
         Formatter formatter = new Formatter();
         List<XYSeries> list = dataset.getSeries();
         int rows = list.get(0).getItems().size();
-        Object[][] dataVector = new Object[rows][8];
+        int columns = 8;
+        Object[][] dataVector = new Object[rows][columns];
         // Заполняем номера строк
         for (int i=0; i<rows; i++) {
             dataVector[i][0] = i+1;

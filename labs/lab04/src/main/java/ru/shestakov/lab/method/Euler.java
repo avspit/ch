@@ -21,9 +21,9 @@ public class Euler {
     public List<Entity> calculate(double x, double y, double from, double to, double h) {
         List<Entity> table = new ArrayList<Entity>();
         EulerEntity last = null;
-        for (double i=from; x<to; i+=h) {
+        for (int i=0; i<(to-from)/h+1; i++) {
             if (last != null) {
-                x = formatter.round(i, 2);
+                x = formatter.round((from+h)*i, 2);
                 y = formatter.round(last.getY() + last.getHfXY(), 5);
             }
             double fXY = cauchy.calculate(x,y);

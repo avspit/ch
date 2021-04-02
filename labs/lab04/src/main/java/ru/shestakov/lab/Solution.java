@@ -14,8 +14,8 @@ import java.awt.*;
 
 public class Solution {
     private final static double INTERVAL_FROM = 0; // Интервал "от"
-    private final static double INTERVAL_TO = 1; // Интервал "до"
-    private final static double STEP = 0.1; // Шаг
+    private final static double INTERVAL_TO = 2; // Интервал "до"
+    private final static double STEP = 0.2; // Шаг
     private final static double INITIAL_CONDITION_X = 0; // Начальное условие x
     private final static double INITIAL_CONDITION_Y = -2; // Начальное условие y
     public final static String LABEL_EXACT_SOLUTION = "Точное решение";

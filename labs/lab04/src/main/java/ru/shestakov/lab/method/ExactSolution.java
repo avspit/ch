@@ -20,8 +20,8 @@ public class ExactSolution {
 
     public List<Entity> calculate(double from, double to, double h) {
         List<Entity> table = new ArrayList<Entity>();
-        for (double i=from; i<to; i+=h) {
-            double x = formatter.round(i, 2);
+        for (int i=0; i<(to-from)/h+1; i++) {
+            double x = formatter.round((from+h)*i, 2);
             double y = formatter.round(function.calculate(x), 5);
             ExactSolutionEntity entity = new ExactSolutionEntity(x, y);
             table.add(entity);

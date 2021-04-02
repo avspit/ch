@@ -23,9 +23,9 @@ public class PredictorCorrector {
     public List<Entity> calculate(double x, double y, double from, double to, double h) {
         List<Entity> table = new ArrayList<Entity>();
         double lastY = Double.MAX_VALUE;
-        for (double i=from; x<to; i+=h) {
+        for (int i=0; i<(to-from)/h+1; i++) {
             if (lastY != Double.MAX_VALUE) {
-                x = formatter.round(i, 2);
+                x = formatter.round((from+h)*i, 2);
                 y = formatter.round(lastY, 5);
             }
             double k1 = x + h/2;
