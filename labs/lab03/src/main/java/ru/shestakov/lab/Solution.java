@@ -9,7 +9,7 @@ import static ru.shestakov.lab.Function.FUNCTION;
 public class Solution {
     private final static double INTERVAL_FROM = 0; // Интервал "от"
     private final static double INTERVAL_TO = Math.PI; // Интервал "до"
-    private final static double SEGMENTS = 80; // Количество отрезков
+    private final static double SEGMENTS = 8; // Количество отрезков
     private final static double EXACT_VALUE = 2.0d; // Точное значение
 
     public static void main(String[] args) {
