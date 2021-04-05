@@ -6,6 +6,10 @@ import java.util.List;
 
 public class SplineInterpolation {
     private List<Node> interpolationNodes;
+    private double[] aValues;
+    private double[] bValues;
+    private double[] cValues;
+    private double[] dValues;
 
     public SplineInterpolation(List<Node> interpolationNodes) {
         this.interpolationNodes = interpolationNodes;
@@ -16,7 +20,14 @@ public class SplineInterpolation {
     }
 
     public void initSplines() {
-        int d = 1;
+        init();
     }
 
+    private void init() {
+        int size = interpolationNodes.size();
+        aValues = new double[size];
+        bValues = new double[size];
+        cValues = new double[size];
+        dValues = new double[size];
+    }
 }
