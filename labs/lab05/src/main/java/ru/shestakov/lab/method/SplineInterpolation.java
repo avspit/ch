@@ -24,7 +24,7 @@ public class SplineInterpolation {
     }
 
     private void init() {
-        int size = interpolationNodes.size();
+        int size = interpolationNodes.size()-1;
         aValues = new double[size];
         bValues = new double[size];
         cValues = new double[size];
