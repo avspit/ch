@@ -60,7 +60,6 @@ public class LineChart extends JFrame {
     private XYSeries createSplineDataset() {
         XYSeries series = new XYSeries(SPLINE_LABEL);
         SplineInterpolation spline = new SplineInterpolation(interpolationNodes);
-        spline.initSplines();
         xData.forEach(elem -> {
             series.add(elem.getX(), spline.calculate(elem.getX()));
         });

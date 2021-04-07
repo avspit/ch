@@ -21,12 +21,28 @@ public class SplineInterpolation {
     }
 
     public double calculate(double xValue) {
-        return 0d;
+        int interval = calculateInterval(xValue);
+        return aValues[interval]
+                + bValues[interval] * (xValue - interpolationNodes.get(interval).getX())
+                + 1/2 * cValues[interval] * Math.pow(xValue - interpolationNodes.get(interval).getX(), 2)
+                + 1/6 * dValues[interval] * Math.pow(xValue - interpolationNodes.get(interval).getX(), 3);
+    }
+
+    private int calculateInterval(double x) {
+        int result = 0;
+        for (int i=1; i<interpolationNodes.size(); i++) {
+            if (x >= interpolationNodes.get(i-1).getX() && x < interpolationNodes.get(i).getX()) {
+                result = i-1;
+                break;
+            }
+        }
+        return result;
     }
 
     private void calculateCoefficients() {
+        // Вычисляем c
         cValues = new TridiagonalMatrixAlgorithm(prepareMatrix()).calculate();
-
+        // Вычисляем a, b, d
         for (int i=1; i<interpolationNodes.size(); i++) {
             dValues[i-1] = (cValues[i] - cValues[i-1]) / hValues[i-1];
             bValues[i-1] = 1/2 * cValues[i] * hValues[i-1] - 1/6 * dValues[i-1] * Math.pow(hValues[i-1], 2) + (interpolationNodes.get(i).getY() - interpolationNodes.get(i-1).getY()) / hValues[i-1];
@@ -36,7 +52,7 @@ public class SplineInterpolation {
 
     private double[][] prepareMatrix() {
         double[][] result = new double[interpolationNodes.size()][interpolationNodes.size()+1];
-        for (int i=1; i<interpolationNodes.size(); i++) {
+        for (int i=1; i<interpolationNodes.size()-1; i++) {
             double hCurr = hValues[i-1];
             double hNext = hValues[i];
             double a = hCurr;
@@ -63,7 +79,7 @@ public class SplineInterpolation {
 
     private void init() {
         // Количество интервалов (сплайнов)
-        numberOfIntervals = interpolationNodes.size()-1;
+        numberOfIntervals = interpolationNodes.size();
         // Коэффициенты a, b, c, d, h
         aValues = new double[numberOfIntervals];
         bValues = new double[numberOfIntervals];
