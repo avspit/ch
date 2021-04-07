@@ -52,7 +52,7 @@ public class SplineInterpolation {
 
     private double[][] prepareMatrix() {
         double[][] result = new double[interpolationNodes.size()][interpolationNodes.size()+1];
-        for (int i=1; i<interpolationNodes.size()-1; i++) {
+        for (int i=1; i<interpolationNodes.size(); i++) {
             double hCurr = hValues[i-1];
             double hNext = hValues[i];
             double a = hCurr;
@@ -63,10 +63,10 @@ public class SplineInterpolation {
             double yPrev = interpolationNodes.get(i-1).getY();
             double d = 3 * ((yNext - yCurr) / hNext - (yCurr - yPrev) / hCurr);
 
-            result[i][i] = a;
+            result[i][i-1] = a;
             result[i-1][i-1] = c;
             result[i-1][i] = b;
-            result[i-1][result.length-1] = d;
+            result[i-1][result.length] = d;
         }
         return result;
     }
