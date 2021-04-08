@@ -60,12 +60,14 @@ x     * A1 B2 C2 0  0  0  | D2
     private double[][] prepareMatrix() {
         double[][] result = new double[interpolationNodes.size()][interpolationNodes.size()+1];
         for (int i=0; i<interpolationNodes.size()-1; i++) {
-            double a = hValues[i+1];
-            double b = hValues[i];
-            double c = 2 * (hValues[i] + hValues[i+1]);
+            double hCurr = hValues[i];
+            double hNext = i>=interpolationNodes.size()-2 ? 0d : hValues[i+1];
+            double a = hNext;
+            double b = hCurr;
+            double c = 2 * (hCurr + hNext);
             double d = 3 * (
-                    (interpolationNodes.get(i+1).getY() - interpolationNodes.get(i).getY()) / hValues[i+1]
-                  - (interpolationNodes.get(i).getY() - (i==0 ? 0d : interpolationNodes.get(i-1).getY())) / hValues[i]
+                    (interpolationNodes.get(i+1).getY() - interpolationNodes.get(i).getY()) / hNext
+                  - (interpolationNodes.get(i).getY() - (i==0 ? 0d : interpolationNodes.get(i-1).getY())) / hCurr
             );
 
             result[i+1][i] = a;
