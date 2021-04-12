@@ -13,6 +13,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import ru.shestakov.lab.function.Function;
 import ru.shestakov.lab.method.SplineInterpolation;
+import ru.shestakov.lab.method.SplineInterpolationOld;
 import ru.shestakov.lab.model.Data;
 import ru.shestakov.lab.model.Node;
 
@@ -59,10 +60,14 @@ public class LineChart extends JFrame {
 
     private XYSeries createSplineDataset() {
         XYSeries series = new XYSeries(SPLINE_LABEL);
-        SplineInterpolation spline = new SplineInterpolation(interpolationNodes);
+        SplineInterpolationOld spline = new SplineInterpolationOld(interpolationNodes);
         xData.forEach(elem -> {
             series.add(elem.getX(), spline.calculate(elem.getX()));
         });
+        /*SplineInterpolation spline = new SplineInterpolation(interpolationNodes);
+        spline.calculateEquations();
+        spline.calculateJoints();
+        spline.calculateCurvatures();*/
         return series;
     }
 

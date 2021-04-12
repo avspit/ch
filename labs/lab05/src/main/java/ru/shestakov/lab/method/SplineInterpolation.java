@@ -1,7 +1,8 @@
 package ru.shestakov.lab.method;
 
-import ru.shestakov.lab.model.Node;
+import ru.shestakov.lab.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SplineInterpolation {
@@ -13,85 +14,73 @@ public class SplineInterpolation {
     private double[] dValues;
     private double[] hValues;
 
+    private List<Spline> splines;
+    private List<Joint> joints;
+    private List<Curvature> curvatures;
+
     public SplineInterpolation(List<Node> interpolationNodes) {
         this.interpolationNodes = interpolationNodes;
-        init();
-        initHValues();
-        calculateCoefficients();
     }
 
-    public double calculate(double xValue) {
-        int interval = calculateInterval(xValue);
-        return aValues[interval]
-                + bValues[interval] * (xValue - interpolationNodes.get(interval).getX())
-                + 1/2 * cValues[interval] * Math.pow(xValue - interpolationNodes.get(interval).getX(), 2)
-                + 1/6 * dValues[interval] * Math.pow(xValue - interpolationNodes.get(interval).getX(), 3);
-    }
+    public void calculateCurvatures() {
+        for (int i=1; i<interpolationNodes.size(); i+=2) {
 
-    private int calculateInterval(double x) {
-        int result = 0;
-        for (int i=1; i<interpolationNodes.size(); i++) {
-            if (x >= interpolationNodes.get(i-1).getX() && x < interpolationNodes.get(i).getX()) {
-                result = i-1;
-                break;
-            }
-        }
-        return result;
-    }
+            Node node = interpolationNodes.get(i);
+            Curvature curvature = new Curvature();
+            curvature.setLeftX(node.getX());
+            curvature.setLeftXn(interpolationNodes.get(i).getX());
+            curvatures.add(curvature);
 
-    private void calculateCoefficients() {
-        // Вычисляем c
-        cValues = new TridiagonalMatrixAlgorithm(prepareMatrix()).calculate();
-        // Вычисляем a, b, d
-        for (int i=1; i<interpolationNodes.size(); i++) {
-            dValues[i-1] = (cValues[i] - cValues[i-1]) / hValues[i-1];
-            bValues[i-1] = 1/2 * cValues[i] * hValues[i-1] - 1/6 * dValues[i-1] * Math.pow(hValues[i-1], 2) + (interpolationNodes.get(i).getY() - interpolationNodes.get(i-1).getY()) / hValues[i-1];
-            aValues[i-1] = interpolationNodes.get(i).getY();
+            node = interpolationNodes.get(i-1);
+            curvature.setRightX(node.getX());
+            curvature.setRightXn(interpolationNodes.get(i).getX());
+            curvatures.add(curvature);
+
+            curvatures.add(curvature);
         }
     }
 
-    /**
-     * B1 C1 0  0  0  0  | D1
-x     * A1 B2 C2 0  0  0  | D2
-     * 0  A2 B3 C3 0  0  | D3
-     * 0  0  A3 B4 C4 0  | D4
-     * 0  0  0  A4 B5 C5 | D5
-     */
-    private double[][] prepareMatrix() {
-        double[][] result = new double[interpolationNodes.size()][interpolationNodes.size()+1];
-        for (int i=0; i<interpolationNodes.size()-1; i++) {
-            double hCurr = hValues[i];
-            double hNext = i>=interpolationNodes.size()-2 ? 0d : hValues[i+1];
-            double a = hNext;
-            double b = hCurr;
-            double c = 2 * (hCurr + hNext);
-            double d = 3 * (
-                    (interpolationNodes.get(i+1).getY() - interpolationNodes.get(i).getY()) / hNext
-                  - (interpolationNodes.get(i).getY() - (i==0 ? 0d : interpolationNodes.get(i-1).getY())) / hCurr
-            );
+    public void calculateJoints() {
+        for (int i=1; i<interpolationNodes.size(); i+=2) {
 
-            result[i+1][i] = a;
-            result[i][i] = c;
-            result[i][i+1] = b;
-            result[i][result[i].length-1] = d;
-        }
-        return result;
-    }
+            Node node = interpolationNodes.get(i);
+            Joint joint = new Joint();
+            joint.setLeftX(node.getX());
+            joint.setLeftXn(interpolationNodes.get(i).getX());
+            joints.add(joint);
 
-    private void initHValues() {
-        for (int i=1; i<interpolationNodes.size(); i++) {
-            hValues[i-1] = interpolationNodes.get(i).getX() - interpolationNodes.get(i-1).getX();
+            node = interpolationNodes.get(i-1);
+            joint.setRightX(node.getX());
+            joint.setRightXn(interpolationNodes.get(i).getX());
+            joints.add(joint);
+
+            joints.add(joint);
         }
     }
 
-    private void init() {
-        // Количество интервалов (сплайнов) = количество заданных узлов минус 1
-        numberOfIntervals = interpolationNodes.size()-1;
-        // Коэффициенты a, b, c, d, h
-        aValues = new double[numberOfIntervals];
-        bValues = new double[numberOfIntervals];
-        cValues = new double[numberOfIntervals];
-        dValues = new double[numberOfIntervals];
-        hValues = new double[numberOfIntervals];
+    public void calculateEquations() {
+        int counter = 0;
+        for (int i=1; i<interpolationNodes.size(); i+=2) {
+
+            List<Equasion> equasions = new ArrayList<>();
+
+            Node node = interpolationNodes.get(i);
+            Equasion eq1 = new Equasion();
+            eq1.setS(node.getY());
+            eq1.setX(node.getX());
+            eq1.setXn(interpolationNodes.get(counter).getX());
+            equasions.add(eq1);
+
+            node = interpolationNodes.get(i-1);
+            Equasion eq2 = new Equasion();
+            eq2.setS(node.getY());
+            eq2.setX(node.getX());
+            eq2.setXn(interpolationNodes.get(counter).getX());
+            equasions.add(eq2);
+
+            Spline spline = new Spline();
+            spline.setEquasions(equasions);
+            splines.add(spline);
+        }
     }
 }

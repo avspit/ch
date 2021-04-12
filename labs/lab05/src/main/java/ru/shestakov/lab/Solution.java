@@ -14,7 +14,8 @@ public class Solution {
 
     public static void main(String[] args) {
         List<Node> interpolationNodes = initInterpolationNodes();
-        List<Data> xData = initXData(0, 2*Math.PI, 0.5);
+        //List<Data> xData = initXData(0, 2*Math.PI, 0.5);
+        List<Data> xData = initXData(interpolationNodes);
 
         EventQueue.invokeLater(() -> {
             LineChart ex = new LineChart(interpolationNodes, xData);
