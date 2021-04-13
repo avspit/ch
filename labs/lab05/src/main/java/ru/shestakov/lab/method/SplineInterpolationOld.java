@@ -23,9 +23,9 @@ public class SplineInterpolationOld {
     public double calculate(double xValue) {
         int interval = calculateInterval(xValue);
         return aValues[interval]
-                + bValues[interval] * (xValue - interpolationNodes.get(interval).getX())
-                + 1/2 * cValues[interval] * Math.pow(xValue - interpolationNodes.get(interval).getX(), 2)
-                + 1/6 * dValues[interval] * Math.pow(xValue - interpolationNodes.get(interval).getX(), 3);
+                + bValues[interval] * (xValue - interpolationNodes.get(interval+1).getX())
+                + 1/2 * cValues[interval] * Math.pow(xValue - interpolationNodes.get(interval+1).getX(), 2)
+                + 1/6 * dValues[interval] * Math.pow(xValue - interpolationNodes.get(interval+1).getX(), 3);
     }
 
     private int calculateInterval(double x) {
