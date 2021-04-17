@@ -16,7 +16,7 @@ public class SplineInterpolation {
         this.intervals = interpolationNodes.size()-1;
         this.hValues = new double[interpolationNodes.size()];
         initHValues();
-        calculateCoefficients();
+        initMValues();
     }
 
     public double calculate(double xValue) {
@@ -38,19 +38,15 @@ public class SplineInterpolation {
         return result;
     }
 
-    private void calculateCoefficients() {
-        mValues = new TridiagonalMatrixAlgorithm(prepareMatrixCoefficients(), interpolationNodes.size()).calculate();
-    }
-
     private MatrixCoefficients prepareMatrixCoefficients() {
-        double[] matrixA = new double[intervals];
-        matrixA[0] = 0;
-        double[] matrixB = new double[intervals];
-        matrixB[0] = -1;
-        matrixB[intervals -1] = -1;
-        double[] matrixC = new double[intervals];
-        matrixC[intervals -1] = 0;
-        double[] matrixD = new double[intervals];
+        double[] aValues = new double[intervals];
+        double[] bValues = new double[intervals];
+        bValues[0] = -1;
+        bValues[intervals-1] = -1;
+        double[] cValues = new double[intervals];
+        cValues[intervals-1] = 0;
+        double[] dValues = new double[intervals];
+
         for (int i=1; i<interpolationNodes.size()-1; i++) {
             double hCurr = hValues[i];
             double hNext = hValues[i+1];
@@ -59,25 +55,22 @@ public class SplineInterpolation {
             double b = (hCurr + hNext) / 3 * -1;
             double d = (interpolationNodes.get(i+1).getY() - interpolationNodes.get(i).getY()) / hNext
                   - (interpolationNodes.get(i).getY() - interpolationNodes.get(i-1).getY()) / hCurr;
-
-            matrixA[i] = a;
-            matrixB[i] = b;
-            matrixC[i-1] = c;
-            matrixD[i] = d;
+            aValues[i] = a;
+            bValues[i] = b;
+            cValues[i-1] = c;
+            dValues[i] = d;
         }
-        return new MatrixCoefficients(
-                matrixA,
-                matrixB,
-                matrixC,
-                matrixD
-        );
+        return new MatrixCoefficients(aValues, bValues, cValues, dValues);
     }
 
     private void initHValues() {
-        hValues[0] = 0;
         for (int i=1; i<interpolationNodes.size(); i++) {
             hValues[i] = interpolationNodes.get(i).getX() - interpolationNodes.get(i-1).getX();
         }
+    }
+
+    private void initMValues() {
+        mValues = new TridiagonalMatrixAlgorithm(prepareMatrixCoefficients(), interpolationNodes.size()).calculate();
     }
 
 }

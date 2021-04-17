@@ -59,15 +59,10 @@ public class LineChart extends JFrame {
 
     private XYSeries createSplineDataset() {
         XYSeries series = new XYSeries(SPLINE_LABEL);
-        //SplineInterpolationWiki spline = new SplineInterpolationWiki(interpolationNodes);
         SplineInterpolation spline = new SplineInterpolation(interpolationNodes);
         xData.forEach(elem -> {
             series.add(elem.getX(), spline.calculate(elem.getX()));
         });
-        /*SplineInterpolation spline = new SplineInterpolation(interpolationNodes);
-        spline.calculateEquations();
-        spline.calculateJoints();
-        spline.calculateCurvatures();*/
         return series;
     }
 

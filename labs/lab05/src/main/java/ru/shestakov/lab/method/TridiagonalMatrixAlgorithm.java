@@ -19,6 +19,7 @@ public class TridiagonalMatrixAlgorithm {
         mValues[0] = 0;
         mValues[nodes-1] = 0;
         mValues[nodes] = 1;
+
         for (int i=0; i<nodes; i++) {
             kValues[i] = coefficients.getcValues()[i] / (coefficients.getbValues()[i] - kValues[i] * coefficients.getaValues()[i]);
         }
