@@ -24,11 +24,7 @@ public class Util {
         );
     }
 
-    public static List<Data> initXData(List<Node> interpolationNodes) {
-        double from = interpolationNodes.get(0).getX();
-        double to = interpolationNodes.get(interpolationNodes.size()-1).getX();
-        double step = (to - from) / (interpolationNodes.size()-1);
-
+    public static List<Data> initXData(double from, double to, double step) {
         List<Data> xData = new ArrayList<>();
         for (double i = from; i <= to; i+=step) {
             xData.add(new Data(i, 0));
