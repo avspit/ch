@@ -16,16 +16,17 @@ public class TridiagonalMatrixAlgorithm {
 
     public double[] calculate() {
         double[] mValues = new double[nodes+1];
-        mValues[0] = 0;
         mValues[nodes-1] = 0;
         mValues[nodes] = 1;
 
+        // Прямой ход
         for (int i=0; i<nodes; i++) {
             kValues[i] = coefficients.getcValues()[i] / (coefficients.getbValues()[i] - kValues[i] * coefficients.getaValues()[i]);
         }
         for (int i=0; i<nodes; i++) {
             eValues[i] = (coefficients.getaValues()[i] * eValues[i] - coefficients.getdValues()[i]) / (coefficients.getbValues()[i] - kValues[i] * coefficients.getaValues()[i]);
         }
+        // Обратный ход
         for (int i=nodes-1; i>=0; i--) {
             mValues[i] = kValues[i] * mValues[i+1] + eValues[i];
         }
